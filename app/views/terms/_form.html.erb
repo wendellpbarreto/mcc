@@ -1,0 +1,135 @@
+<%= form_for(@term, html: { class: 'form-horizontal' }) do |f| %>
+<% if @term.errors.any? %>
+<div class="alert alert-danger alert-dismissable">
+  <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+  <h2><%= pluralize(@term.errors.count, "error") %> prohibited this term from being saved:</h2>
+
+  <ul>
+    <% @term.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+<div class="form-group">
+  <%= f.label :legal_representer, class: 'control-label col-xs-12' %>
+  <div class="col-xs-12">
+    <%= f.text_field :legal_representer, class: 'form-control' %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :cpf_cnpj, class: 'control-label col-xs-12' %>
+  <div class="col-xs-12">
+    <%= f.text_field :cpf_cnpj, class: 'form-control' %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :address, class: 'control-label col-xs-12' %>
+  <div class="col-xs-12">
+    <%= f.text_field :address, class: 'form-control' %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :contact, class: 'control-label col-xs-12' %>
+  <div class="col-xs-12">
+    <%= f.text_field :contact, class: 'form-control' %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :role, class: 'control-label col-xs-12' %>
+  <div class="col-xs-12">
+    <%= f.text_field :role, class: 'form-control' %>
+  </div>
+</div>
+<div class="form-group">
+  <label class="control-label col-xs-12">Período</label>
+  <div class="col-xs-6">
+    <%= f.label :start_of_period, "De" %>
+    <%= f.text_field :start_of_period, class: 'form-control' %>
+  </div>
+  <div class="col-xs-6">
+    <%= f.label :end_of_period, "Até" %>
+    <%= f.text_field :end_of_period, class: 'form-control' %>
+  </div>
+</div>
+<h6 class="form-title">O Solicitante requer ao <strong>MUSEU CÂMARA CASCUDO/UFRN</strong> a saída temporária dos seguintes objetos pelo período acima informado:</h6>
+<div class="form-group">
+  <div class="col-xs-12">
+    <table id="artworks" class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Nº</th>
+          <th colspan="4">OBJETO</th>
+        </tr>
+      </thead>
+      <%= f.fields_for :artworks do |artwork| %>
+      <%= render 'artwork_fields', f: artwork %>
+      <% end %>
+    </table>
+  </div>
+  <div class="col-xs-12">
+    <%= link_to_add_association '<i class="fa fa-plus"></i> Adicionar Objeto'.html_safe, f, :artworks,
+    :'data-association-insertion-node' => '#artworks',
+    :'data-association-insertion-method' => 'append',
+    :class => 'btn btn-white btn-bitbucket pull-right' %>
+  </div>
+</div>
+<div class="form-group">
+  <label class="control-label col-xs-12">Finalidade da saída temporária</label>
+    <% @justifications.each_with_index do |justification, index| %>
+        <div class="col-sm-12 ">
+            <%= check_box_tag :justification_ids, justification.id, @term.justifications.include?(justification), id: "justification_ids_#{justification.id}", name: "term[justification_ids][]" %>
+            <%= label_tag "justification_ids_#{justification.id}", justification.text, class: "checkbox-label" %>
+        </div>
+    <% end %>
+</div>
+
+<div class="form-group">
+  <%= f.label :justification_description, class: 'control-label col-xs-12' %>
+  <div class="col-xs-12">
+    <%= f.text_area :justification_description, class: 'form-control' %>
+  </div>
+</div>
+<h5 class="form-title">Dados sobre o transporte</h6>
+  <div class="form-group">
+    <%= f.label :removing_way, class: 'control-label col-xs-12' %>
+    <div class="col-xs-12">
+      <%= f.text_field :removing_way, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :returning_way, class: 'control-label col-xs-12' %>
+    <div class="col-xs-12">
+      <%= f.text_field :returning_way, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :number_of_items, class: 'control-label col-xs-12' %>
+    <div class="col-xs-12">
+      <%= f.text_field :number_of_items, class: 'form-control' %>
+    </div>
+  </div>
+  <h5 class="form-title">CONDIÇÕES PARA A SAÍDA TEMPORÁRIA DE OBJETOS DO MUSEU CÂMARA CASCUDO/UFRN</h6>
+    <ul class="form-list">
+      <li>O Solicitante obriga-se a manter o objeto emprestado, conservando-o, segurando-o e atendendo a todas as exigências no que refere a conservação (no que diz respeito aos níveis de umidade relativa, temperatura, iluminação, vibração assim como assegurar a ausência de poluentes atmosféricos nas salas de exposição e áreas de depósito das peças), seguro, transporte e embalagem para a referida peça do museu, assim como, no termino do prazo estipulado neste contrato, seja entregue ao Museu, nas mesmas condições que ora recebe, sob pena de responder por perdas e danos.</li>
+
+      <li>As peças serão encaminhadas devidamente embaladas, acompanhadas de documentação e sob a supervisão do responsável pelo empréstimo. A reembalagem deverá ser a mesma ou similar à embalagem inicial, utilizado os mesmos métodos de quando as obras foram recebidas.</li>
+
+      <li>Caso tenha sido combinado de forma diferente, todos os custos de embalagem, transporte e seguro estarão a cargo do SOLICITANTE.</li>
+
+      <li>Ao Solicitante é vedado o direito de efetuar qualquer tipo de restauração do objeto e sua consequente retenção. Nenhum objeto poderá ser alterado, limpo ou consertado sem a permissão escrita do Museu Câmara Cascudo/UFRN.</li>
+
+      <li>O Solicitante, constituído em mora, além de por ela responder, pagará todo e qualquer prejuízo que causar ao objeto durante o tempo que estiver emprestado.</li>
+
+      <li>Cada um dos objetos deverá ter sua identificação e nela já constar os créditos devidos. Caso não tenha sido combinado por escrito, nenhuma reprodução será permitida ao solicitante.</li>
+
+      <li>Os objetos serão obrigatoriamente devolvidos ao Museu Câmara Cascudo/UFRN em condições similares ao fim do prazo aprovado. Qualquer prorrogação do período de empréstimo terá que ser aprovada por escrito pelo Diretor ou seu substituto, além de obedecer aos mesmos pré-requisitos técnicos, por questões de segurança e de conservação.</li>
+    </ul>
+    <p class="form-paragraph">Quando houver qualquer tipo de conflito entre este CONTRATO e quaisquer problemas do SOLICITANTE, os termos deste CONTRATO serão os válidos. Este CONTRATO está lido pelo SOLICITANTE que concorda com as condições acima propostas pelo Museu Câmara Cascudo/UFRN.</p>
+    <div class="hr-line-dashed"></div>
+    <div class="form-group">
+      <div class="col-xs-12 text-center">
+        <%= f.submit "Salvar", class: 'btn btn-primary' %>
+      </div>
+    </div>
+    <% end %>

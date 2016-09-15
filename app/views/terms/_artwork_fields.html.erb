@@ -1,0 +1,61 @@
+<tbody class="artwork">
+  <tr>
+    <td rowspan="7" width="20" class="number"></td>
+    <td rowspan="7" width="250" class="text-center">
+      <%= image_tag f.object.image, class: 'preview-image', width: 250 if f.object.image %>
+      <%= f.file_field :image, data: { 'preview-image': 'true' } %>
+    </td>
+  </tr> 
+  <tr>
+    <td width="100" class="va-middle">
+      <%= f.label :register_number %>
+    </td>
+    <td colspan="2">
+      <%= f.text_field :register_number, class: "form-control" %>
+    </td>
+  </tr> 
+  <tr>
+    <td width="100" class="va-middle">
+      <%= f.label :name %>
+    </td>
+    <td colspan="2">
+      <%= f.text_field :name, class: "form-control" %>
+    </td>
+  </tr> 
+  <tr>
+    <td width="100" class="va-middle">
+      <%= f.label :material %>
+    </td>
+    <td colspan="2">
+      <%= f.text_field :material, class: "form-control" %>
+    </td>
+  </tr> 
+  <tr>
+    <td width="100" class="va-middle">
+      <%= f.label :dimensions %>
+    </td>
+    <td colspan="2">
+      <%= f.text_field :dimensions, class: "form-control" %>
+    </td>
+  </tr> 
+  <tr>
+    <td width="100" class="va-middle">
+      <%= f.label :state_of_conservation %>
+    </td>
+    <td colspan="2">
+      <%= f.text_field :state_of_conservation, class: "form-control" %>
+    </td>
+  </tr> 
+  <tr>
+    <td width="100" class="va-middle">
+      <%= f.label :observation %>
+    </td>
+    <td colspan="2">
+      <%= f.text_area :observation, class: "form-control" %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="4" class="text-right"><small>Remover</small></td>
+    <td width="22"><%= link_to_remove_association '<i class="fa fa-times"></i>'.html_safe, f, { wrapper_class: 'artwork', class: "btn btn-xs btn-outline btn-danger" } %></td>
+  </tr>
+</tbody>

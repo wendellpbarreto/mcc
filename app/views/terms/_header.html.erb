@@ -1,0 +1,23 @@
+<header>
+    <div class="logo--wrap">
+        <% if (show_as_pdf rescue false) %>
+        <%=params[:debug].present? ? image_tag("/assets@admin/images/logo@ufrn.jpg", class: 'logo-ufrn', width: 80) : wicked_pdf_image_tag("/assets@admin/images/logo@ufrn.jpg", class: 'logo-ufrn', width: 80) -%>
+        <% else %>
+        <img src="/assets@admin/images/logo@ufrn.jpg" alt="Logo UFRN" width="80" class="logo-ufrn">
+        <% end %>
+    </div>
+    <div class="info">
+        <h1>UNIVERSIDADE FEDERAL DO RIO GRANDE DO NORTE</h1>
+        <h1>MUSEU CÂMARA CASCUDO</h1>
+        <h1>DIVISÃO DE MUSEOLOGIA</h1>
+        <h1>SETOR DE DOCUMENTAÇÃO</h1>
+        <h2>TERMO PARA CONTROLE DE SAÍDA TEMPORÁRIA DE OBJETO<br> Nº ST<%= '%05i' % @term.id %>/<%= Time.now.year %></h2>
+    </div>
+    <div class="logo--wrap">
+        <% if (show_as_pdf rescue false) %>
+        <%=params[:debug].present? ? image_tag("/assets@admin/images/logo@mcc.jpg", class: 'logo-mcc', width: 130) : wicked_pdf_image_tag("/assets@admin/images/logo@mcc.jpg", class: 'logo-mcc', width: 130) -%>
+        <% else %>
+        <img src="/assets@admin/images/logo@mcc.jpg" alt="Logo MCC" width="130" class="logo-mcc">
+        <% end %>
+    </div>
+</header>

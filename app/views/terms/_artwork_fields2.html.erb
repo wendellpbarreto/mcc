@@ -1,0 +1,60 @@
+<tbody class="artwork">
+  <tr>
+    <td rowspan="7" width="20" class="number"></td>
+    <td rowspan="7" width="250" class="text-center">
+      <% if show_as_pdf %>
+        <%= params[:debug].present? ? image_tag(f.object.image, width: 250) : wicked_pdf_image_tag(f.object.image, width: 250) -%>
+      <% else %>
+        <%= image_tag f.object.image, class: 'preview-image', width: 250 if f.object.image %>
+      <% end %>
+    </td>
+  </tr> 
+  <tr>
+    <td width="100" class="va-middle">
+      <%= f.label :register_number %>
+    </td>
+    <td colspan="2">
+      <%= f.text_field :register_number, class: "form-control" %>
+    </td>
+  </tr> 
+  <tr>
+    <td width="100" class="va-middle">
+      <%= f.label :name %>
+    </td>
+    <td colspan="2">
+      <%= f.text_field :name, class: "form-control" %>
+    </td>
+  </tr> 
+  <tr>
+    <td width="100" class="va-middle">
+      <%= f.label :material %>
+    </td>
+    <td colspan="2">
+      <%= f.text_field :material, class: "form-control" %>
+    </td>
+  </tr> 
+  <tr>
+    <td width="100" class="va-middle">
+      <%= f.label :dimensions %>
+    </td>
+    <td colspan="2">
+      <%= f.text_field :dimensions, class: "form-control" %>
+    </td>
+  </tr> 
+  <tr>
+    <td width="100" class="va-middle">
+      <%= f.label :state_of_conservation %>
+    </td>
+    <td colspan="2">
+      <%= f.text_field :state_of_conservation, class: "form-control" %>
+    </td>
+  </tr> 
+  <tr>
+    <td width="100" class="va-middle">
+      <%= f.label :observation %>
+    </td>
+    <td colspan="2">
+      <%= f.text_field :observation, class: "form-control" %>
+    </td>
+  </tr>
+</tbody>

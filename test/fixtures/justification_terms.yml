@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  justification_id: 
+  term_id: 
+
+two:
+  justification_id: 
+  term_id: 

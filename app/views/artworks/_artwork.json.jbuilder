@@ -1,0 +1,2 @@
+json.extract! artwork, :id, :image, :register_number, :name, :material, :dimensions, :state_of_conservation, :observation, :term_id, :created_at, :updated_at
+json.url artwork_url(artwork, format: :json)

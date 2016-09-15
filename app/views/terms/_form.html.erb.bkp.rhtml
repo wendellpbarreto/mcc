@@ -1,0 +1,101 @@
+<%= form_for(@term, html: { class: 'form-horizontal' }) do |f| %>
+  <% if @term.errors.any? %>
+    <div class="alert alert-danger alert-dismissable">
+      <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+      <h2><%= pluralize(@term.errors.count, "error") %> prohibited this term from being saved:</h2>
+
+      <ul>
+      <% @term.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :legal_representer, class: 'control-label col-sm-2' %>
+    <div class="col-sm-10">
+      <%= f.text_field :legal_representer, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :cpf_cnpj, class: 'control-label col-sm-2' %>
+    <div class="col-sm-10">
+      <%= f.text_field :cpf_cnpj, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :address, class: 'control-label col-sm-2' %>
+    <div class="col-sm-10">
+      <%= f.text_field :address, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :contact, class: 'control-label col-sm-2' %>
+    <div class="col-sm-10">
+      <%= f.text_field :contact, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :role, class: 'control-label col-sm-2' %>
+    <div class="col-sm-10">
+      <%= f.text_field :role, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :start_of_period, class: 'control-label col-sm-2' %>
+    <div class="col-sm-10">
+      <%= f.text_field :start_of_period, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :end_of_period, class: 'control-label col-sm-2' %>
+    <div class="col-sm-10">
+      <%= f.text_field :end_of_period, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="" class="control-label col-sm-2">Objetos</label>
+    <div id="artworks" class="col-sm-10">
+      <%= f.fields_for :artworks do |artwork| %>
+        <%= render 'artwork_fields', f: artwork %>
+      <% end %>
+    </div>
+    <div class="col-sm-10 col-sm-offset-2">
+      <%= link_to_add_association '<i class="fa fa-plus"></i> Objeto'.html_safe, f, :artworks,
+      :'data-association-insertion-node' => '#artworks',
+      :'data-association-insertion-method' => 'append',
+      :class => 'btn btn-white btn-bitbucket' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :justification_description, class: 'control-label col-sm-2' %>
+    <div class="col-sm-10">
+      <%= f.text_field :justification_description, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :removing_way, class: 'control-label col-sm-2' %>
+    <div class="col-sm-10">
+      <%= f.text_field :removing_way, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :returning_way, class: 'control-label col-sm-2' %>
+    <div class="col-sm-10">
+      <%= f.text_field :returning_way, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :number_of_items, class: 'control-label col-sm-2' %>
+    <div class="col-sm-10">
+      <%= f.text_field :number_of_items, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="hr-line-dashed"></div>
+  <div class="form-group">
+    <div class="col-sm-10 col-sm-offset-2">
+      <%= link_to( t('Back'), terms_path, class: 'btn btn-white' ) %>
+      <%= f.submit class: 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>

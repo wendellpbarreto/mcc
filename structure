@@ -1,0 +1,7 @@
+rails generate scaffold Artwork image:string register_number:string name:string material:string dimensions:string state_of_conservation:string observation:string term:references
+
+rails generate scaffold Justification text:string
+
+rails generate scaffold Term legal_representer:string cpf_cnpj:string address:string contact:string role:string start_of_period:string end_of_period:string justification_description:string removing_way:string returning_way:string number_of_items:string
+
+rails generate model JustificationTerm justification:references term:references

@@ -1,0 +1,42 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-sm-12 col-md-10">
+    <h2>Justifications</h2>
+    <ol class="breadcrumb">
+      <li><%= link_to t('Justifications'), justifications_path %></li>
+      <li class="active"><strong><%= t('Edit') %></strong></li>
+    </ol>
+  </div>
+  <div class="col-sm-12 col-md-2">
+
+  </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5><%= t('View') %> justification <%= @justification.id %><small></small></h5>
+        <div class="ibox-tools">
+          <div class="pull-right">
+            <%= link_to '<i class="fa fa-reply"></i>'.html_safe, justifications_path %>
+          </div>
+        </div>
+      </div>
+      <div class="ibox-content">
+                <div class="row">
+          <label class="control-label col-sm-2">Text</label>
+          <div class="col-sm-10">
+          <%= @justification.text %>
+          </div>
+        </div>
+                <div class="hr-line-dashed"></div>
+        <div class="row clearfix">
+          <div class="col-sm-10 col-sm-offset-2">
+            <%= link_to( t('Back'), justifications_path, class: 'btn btn-white' ) %>
+            <%= link_to t('Edit'), edit_justification_path(@justification), class: 'btn btn-primary' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

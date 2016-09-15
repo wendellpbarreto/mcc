@@ -1,0 +1,29 @@
+pt-BR:
+  activerecord:
+    models:
+      term:
+        one: Termo
+        other: Termos
+      artwork:
+        one: Obra de arte 
+        other: Obras de arte
+    attributes:
+      term:
+        legal_representer: Solicitante/Representante Legal
+        cpf_cnpj: CPF/CNPJ 
+        address: Endereço
+        contact: Contato
+        role: Cargo/Função
+        justification_description: Descrever Exatamente
+        removing_way: Meio de Transporte para Retirada
+        returning_way: Meio de Transporte para o Retorno
+        number_of_items: Número de Itens (embalagens)
+      artwork:
+        register_number: Nº de registro
+        name: Objeto
+        material: Material
+        dimensions: Dimensões
+        state_of_conservation: Conservação
+        observation: Observação
+      
+  

@@ -1,0 +1,2 @@
+json.extract! term, :id, :legal_representer, :cpf_cnpj, :address, :contact, :role, :start_of_period, :end_of_period, :justification_description, :removing_way, :returning_way, :number_of_items, :created_at, :updated_at
+json.url term_url(term, format: :json)

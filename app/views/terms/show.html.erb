@@ -1,0 +1,178 @@
+<div class="term">
+	<%= render "header", show_as_pdf: show_as_pdf %>
+
+	<div class="form-group row">
+		<label for="legal_representer" class="control-label col-xs-12">Solicitante/Representante Legal</label>
+		<div class="col-xs-12">
+			<p class="form-control-static"><%= @term.legal_representer %></p> 
+		</div>
+	</div>
+	<div class="form-group row">
+		<label for="cpf_cnpj" class="control-label col-xs-12">CPF/CNJP</label>
+		<div class="col-xs-12">
+			<p class="form-control-static"><%= @term.cpf_cnpj %></p> 
+		</div>
+	</div>
+	<div class="form-group row">
+		<label for="address" class="control-label col-xs-12">ENDEREÇO</label>
+		<div class="col-xs-12">
+			<p class="form-control-static"><%= @term.address %></p> 
+		</div>
+	</div>
+	<div class="form-group row">
+		<label for="contact" class="control-label col-xs-12">CONTATO</label>
+		<div class="col-xs-12">
+			<p class="form-control-static"><%= @term.contact %></p> 
+		</div>
+	</div>
+	<div class="form-group row">
+		<label for="role" class="control-label col-xs-12">CARGO/FUNÇÃO</label>
+		<div class="col-xs-12">
+			<p class="form-control-static"><%= @term.role %></p> 
+		</div>
+	</div>
+	<h5 class="form-title">Período</h5>
+	<div class="form-group row">
+		<div class="col-xs-6">
+			<label for="start_of_period">DE</label>
+			<p class="form-control-static"><%= @term.start_of_period %></p>
+		</div>
+		<div class="col-xs-6">
+			<label for="end_of_period">ATÉ</label>
+			<p class="form-control-static"><%= @term.end_of_period %></p>
+		</div>
+	</div>
+
+	<h6 class="form-title">O Solicitante requer ao <strong>MUSEU CÂMARA CASCUDO/UFRN</strong> a saída temporária dos seguintes objetos pelo período acima informado:</h6>
+	<div class="form-group row">
+		<div class="col-xs-12">
+			<table id="artworks" class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Nº</th>
+						<th colspan="4">OBJETO</th>
+					</tr>
+				</thead>
+				<% @term.artworks.each_with_index do |artwork| %>
+				<tr>
+					<td rowspan="7" width="20" class="number"></td>
+					<td rowspan="7" width="250" class="text-center">
+						<% if (show_as_pdf rescue false) %>
+						<%= params[:debug].present? ? image_tag(artwork.image, width: 250) : wicked_pdf_image_tag(artwork.image, width: 250) -%>
+						<% else %>
+						<%= image_tag artwork.image, class: 'preview-image', width: 250 if artwork.image %>
+						<% end %>
+					</td>
+				</tr> 
+				<tr>
+					<td width="100" class="va-middle">
+						<label for="register_number">Nº de registro</label>
+					</td>
+					<td colspan="2">
+						<p><%= artwork.register_number %></p>
+					</td>
+				</tr> 
+				<tr>
+					<td width="100" class="va-middle">
+						<label for="name">Objeto</label>
+					</td>
+					<td colspan="2">
+						<p><%= artwork.name %></p>
+					</td>
+				</tr> 
+				<tr>
+					<td width="100" class="va-middle">
+						<label for="material">Material</label>
+					</td>
+					<td colspan="2">
+						<p><%= artwork.material %></p>
+					</td>
+				</tr> 
+				<tr>
+					<td width="100" class="va-middle">
+						<label for="dimensions">Dimensões</label>
+					</td>
+					<td colspan="2">
+						<p><%= artwork.dimensions %></p>
+					</td>
+				</tr> 
+				<tr>
+					<td width="100" class="va-middle">
+						<label for="state_of_conservation">Conservação</label>
+					</td>
+					<td colspan="2">
+						<p><%= artwork.state_of_conservation %></p>
+					</td>
+				</tr> 
+				<tr>
+					<td width="100" class="va-middle">
+						<label for="observation">Observação</label>
+					</td>
+					<td colspan="2">
+						<p><%= artwork.observation %></p>
+					</td>
+				</tr>
+				<% end %>
+			</table>
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<label class="control-label col-xs-12">Finalidade da saída temporária</label>
+		<% @justifications.each_with_index do |justification, index| %>
+		<div class="col-sm-12 ">
+			<p>
+				<%= "<strong>[x] #{justification.text}</strong>".html_safe if @term.justifications.include?(justification) %>
+				<%= "[ ] #{justification.text}".html_safe unless @term.justifications.include?(justification) %>
+			</p>
+		</div>
+		<% end %>
+	</div>
+	<div class="form-group row">
+		<label for="justification_description" class="control-label col-xs-12">Descrever exatamente</label>
+		<div class="col-xs-12">
+			<p class="form-control-static"><%= @term.justification_description %></p>
+		</div>
+	</div>
+
+	<h5 class="form-title">Dados sobre o transporte</h5>
+	<div class="form-group row">
+		<label for="removing_way" class="control-label col-xs-12">Meio de transporte para retirada</label>
+		<div class="col-xs-12">
+			<p class="form-control-static"><%= @term.removing_way %></p> 
+		</div>
+	</div>
+	<div class="form-group row">
+		<label for="returning_way" class="control-label col-xs-12">Meio de transporte para o retorno</label>
+		<div class="col-xs-12">
+			<p class="form-control-static"><%= @term.returning_way %></p> 
+		</div>
+	</div>
+	<div class="form-group row">
+	<label for="number_of_items" class="control-label col-xs-12">Número de itens (embalagens)</label>
+		<div class="col-xs-12">
+			<p class="form-control-static"><%= @term.number_of_items %></p> 
+		</div>
+	</div>
+
+	<h5 class="form-title">CONDIÇÕES PARA A SAÍDA TEMPORÁRIA DE OBJETOS DO MUSEU CÂMARA CASCUDO/UFRN</h5>
+	<ul class="form-list">
+		<li>O Solicitante obriga-se a manter o objeto emprestado, conservando-o, segurando-o e atendendo a todas as exigências no que refere a conservação (no que diz respeito aos níveis de umidade relativa, temperatura, iluminação, vibração assim como assegurar a ausência de poluentes atmosféricos nas salas de exposição e áreas de depósito das peças), seguro, transporte e embalagem para a referida peça do museu, assim como, no termino do prazo estipulado neste contrato, seja entregue ao Museu, nas mesmas condições que ora recebe, sob pena de responder por perdas e danos.</li>
+
+		<li>As peças serão encaminhadas devidamente embaladas, acompanhadas de documentação e sob a supervisão do responsável pelo empréstimo. A reembalagem deverá ser a mesma ou similar à embalagem inicial, utilizado os mesmos métodos de quando as obras foram recebidas.</li>
+
+		<li>Caso tenha sido combinado de forma diferente, todos os custos de embalagem, transporte e seguro estarão a cargo do SOLICITANTE.</li>
+
+		<li>Ao Solicitante é vedado o direito de efetuar qualquer tipo de restauração do objeto e sua consequente retenção. Nenhum objeto poderá ser alterado, limpo ou consertado sem a permissão escrita do Museu Câmara Cascudo/UFRN.</li>
+
+		<li>O Solicitante, constituído em mora, além de por ela responder, pagará todo e qualquer prejuízo que causar ao objeto durante o tempo que estiver emprestado.</li>
+
+		<li>Cada um dos objetos deverá ter sua identificação e nela já constar os créditos devidos. Caso não tenha sido combinado por escrito, nenhuma reprodução será permitida ao solicitante.</li>
+
+		<li>Os objetos serão obrigatoriamente devolvidos ao Museu Câmara Cascudo/UFRN em condições similares ao fim do prazo aprovado. Qualquer prorrogação do período de empréstimo terá que ser aprovada por escrito pelo Diretor ou seu substituto, além de obedecer aos mesmos pré-requisitos técnicos, por questões de segurança e de conservação.</li>
+	</ul>
+	<p class="form-paragraph">Quando houver qualquer tipo de conflito entre este CONTRATO e quaisquer problemas do SOLICITANTE, os termos deste CONTRATO serão os válidos. Este CONTRATO está lido pelo SOLICITANTE que concorda com as condições acima propostas pelo Museu Câmara Cascudo/UFRN.</p>
+
+
+	<%= render "footer", show_as_pdf: show_as_pdf %>
+</div>

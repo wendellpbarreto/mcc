@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  image: MyString
+  register_number: MyString
+  name: MyString
+  material: MyString
+  dimensions: MyString
+  state_of_conservation: MyString
+  observation: MyString
+  term_id: 
+
+two:
+  image: MyString
+  register_number: MyString
+  name: MyString
+  material: MyString
+  dimensions: MyString
+  state_of_conservation: MyString
+  observation: MyString
+  term_id: 
